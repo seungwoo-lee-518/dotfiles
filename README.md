@@ -14,6 +14,10 @@
 * `Top (or Status) Bar`: [i3blocks](https://github.com/vivien/i3blocks)
 * `Application Launcher`: [wofi](https://man.archlinux.org/man/wofi.1.en)
 
+#### Screenshot
+
+![](./230124_Screenshot.png)
+
 #### 문제
 
 * `swaylock` 을 사용한 경우, 가끔 락을 걸었다가 로그인이 안되는 문제가 있습니다.
@@ -95,8 +99,14 @@ sudo systemctl start NetworkManager
 yay kime
 ```
 
+#### `(6)` Screenshot 유틸리티 설치
+
+* [sway-interactive-screenshot](https://github.com/moverest/sway-interactive-screenshot)
+를 설치하시면 되며, 환경설정을 수정하지 않으셨다면, `PrintScreen` 키를 입력하시면 스크린샷
+을 찍으실 수 있습니다.
+
 * `TODO`: `sway` 시작 시 `kime` 도 같이 실행되도록 환경설정 변경.
 
-#### `(6)` Firefox 비디오 가속하기
+#### `(*)` Firefox 비디오 가속하기
 
 * `about:config` 에서 `media.ffmpeg.vaapi.enabled` 를 True 로 변경하면 됩니다.
