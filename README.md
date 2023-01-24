@@ -99,13 +99,13 @@ sudo systemctl start NetworkManager
 yay kime
 ```
 
+* `TODO`: `sway` 시작 시 `kime` 도 같이 실행되도록 환경설정 변경.
+
 #### `(6)` Screenshot 유틸리티 설치
 
 * [sway-interactive-screenshot](https://github.com/moverest/sway-interactive-screenshot)
 를 설치하시면 되며, 환경설정을 수정하지 않으셨다면, `PrintScreen` 키를 입력하시면 스크린샷
 을 찍으실 수 있습니다.
-
-* `TODO`: `sway` 시작 시 `kime` 도 같이 실행되도록 환경설정 변경.
 
 #### `(*)` Firefox 비디오 가속하기
 
