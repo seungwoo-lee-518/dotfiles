@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "[+] Install NetworkManager"
+sudo pacman -Sy networkmanager
+
+echo "[+] Install Sof Firmware"
+sudo pacman -Sy sof-firmware
+
+echo "[+] Install Reqired Fonts"
+sudo pacman -Sy otf-font-awesome terminus-font noto-fonts-cjk ttf-dejavu
+
+echo "[+] Install i3Blocks & i3WM"
+sudo pacman -Sy i3blocks i3-wm
+
+echo "[+] Install Utilties"
+sudo pacman -Sy wofi firefox helix git
