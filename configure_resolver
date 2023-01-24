@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+echo "[+] Create Directory to /etc/systemd"
+sudo mkdir -p /etc/systemd
+
+echo "[+] Copy Resolver Configuration to /etc/systemd/resolved.conf"
+sudo cp ./etc/systemd/resolved.conf /etc/systemd/resolved.conf
+
+echo "[+] Enable systemd-resolved.service"
+sudo systemctl enable systemd-resolved.service
+
+echo "[+] Start systemd-resolved.service"
+sudo systemctl start systemd-resolved.service
