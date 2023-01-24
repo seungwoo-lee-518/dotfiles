@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "[+] Create iwd configuration directory"
+sudo mkdir -p /etc/iwd
+
+echo "[+] Copy iwd configuration"
+sudo cp ./etc/iwd/main.conf /etc/iwd
