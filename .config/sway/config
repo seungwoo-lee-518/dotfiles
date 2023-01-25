@@ -34,6 +34,8 @@ set $term foot
 ### AutoStart configuration
 
 exec kime
+exec mako
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 ### Idle configuration
 #
