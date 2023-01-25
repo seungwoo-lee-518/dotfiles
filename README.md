@@ -21,10 +21,10 @@
 #### 문제
 
 * `swaylock` 을 사용한 경우, 가끔 락을 걸었다가 로그인이 안되는 문제가 있습니다.
-  * [swaylock#268](https://github.com/swaywm/swaylock/issues/268) 이슈와 관련이 있는 것
-  같은데, 다음에 다시 설치할 때 테스트해보도록 하겠습니다.
-  * 어차피 저장을 잘 하면 껐다가 키면 크게 문제는 없을 것 같습니다. (아니면, 다른 락커를 쓰던가?)
-  
+  * [swaylock#268](https://github.com/swaywm/swaylock/issues/268) 이슈와 관련이 있고
+  비밀번호에 특수문자를 넣지 않고 사용자를 생성한 결과 정상적으로 로그인되는 것을 확인
+  하였습니다.
+    
 #### Firmware 설정
 
 * Secure Boot 만 `Disabled` 으로 변경하였습니다.
