@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 echo "[+] Install NetworkManager"
-sudo pacman -Sy networkmanager
+sudo pacman -S --noconfirm networkmanager
 
 echo "[+] Install Sof Firmware"
-sudo pacman -Sy sof-firmware
+sudo pacman -S --noconfirm sof-firmware
 
 echo "[+] Install Reqired Fonts"
-sudo pacman -Sy otf-font-awesome terminus-font noto-fonts-cjk ttf-dejavu
+sudo pacman -S --noconfirm otf-font-awesome terminus-font noto-fonts-cjk ttf-dejavu
 
 echo "[+] Install i3Blocks & i3WM"
-sudo pacman -Sy i3blocks i3-wm
+sudo pacman -S --noconfirm i3blocks i3-wm
 
 echo "[+] Install Utilties"
-sudo pacman -Sy wofi firefox helix git
+sudo pacman -S --noconfirm wofi firefox helix git mako
