@@ -13,4 +13,4 @@ echo "[+] Install i3Blocks & i3WM"
 sudo pacman -S --noconfirm i3blocks i3-wm
 
 echo "[+] Install Utilties"
-sudo pacman -S --noconfirm wofi firefox helix git mako
+sudo pacman -S --noconfirm wofi firefox helix git mako xdg-desktop-portal-wlr
