@@ -1,5 +1,19 @@
 # Neovim Configuration
 
+## Configuration Results
+
+### Markdown
+
+![](./screenshots/neovim_markdown.png)
+
+### Golang
+
+![](./screenshots/neovim_golang.png)
+
+### Python
+
+![](./screenshots/neovim_python.png)
+
 ## Install Neovim (on Arch Linux)
 
 ```bash
