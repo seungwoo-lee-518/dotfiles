@@ -7,11 +7,12 @@ require('packer').startup(function(use)
 	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 	use 'ray-x/go.nvim'
 	use 'ray-x/guihua.lua' -- recommended if need floating window support
-	use 'nvim-treesitter/nvim-treesitter'
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'folke/tokyonight.nvim' -- theme
 	use 'nvim-tree/nvim-web-devicons'
 	use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
 	use 'lewis6991/gitsigns.nvim'
+	use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
 end)
 
 vim.cmd [[packadd packer.nvim]]
@@ -53,6 +54,10 @@ require('lspconfig').volar.setup {
 			tsdk = '/home/seungwoo/.local/share/pnpm/global/5/node_modules/typescript/lib'
 		}
 	}
+}
+
+require('lspconfig').nil_ls.setup {
+	capabilities = capabilities
 }
 
 -- luasnip setup
@@ -99,3 +104,5 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+require('nvim-treesitter.configs').setup {}
