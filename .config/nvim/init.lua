@@ -20,3 +20,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 require('go').setup()
+
+-- nvim-tree Configuration
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.opt.termguicolors = true
+-- empty setup using defaults
+require("nvim-tree").setup()
