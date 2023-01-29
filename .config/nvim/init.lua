@@ -2,6 +2,8 @@ require('plugins')
 -- Set Colorscheme
 vim.cmd[[ colorscheme tokyonight-storm ]]
 
+require('gitsigns').setup()
+
 -- Mandatory
 vim.wo.number = true
 vim.cmd[[ set noexpandtab ]]
@@ -16,3 +18,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
   group = format_sync_grp,
 })
+
+require('go').setup()
