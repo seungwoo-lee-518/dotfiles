@@ -64,11 +64,12 @@ require('lspconfig').tailwindcss.setup {
 	capabilities = capabilities
 }
 
--- pnpm install -g graphql-language-service-cli
+-- pnpm install -g graphql graphql-language-service-cli
 -- NOTE: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#graphql
 -- NOTE: https://the-guild.dev/graphql/config/docs
 require('lspconfig').graphql.setup {
-	capabilities = capabilities
+	capabilities = capabilities,
+	filetypes = {'vue', 'typescript', 'javascriptreact', 'typescriptreact'}
 }
 
 -- npm install -g dockerfile-language-server-nodejs
