@@ -13,6 +13,7 @@ require('packer').startup(function(use)
 	use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
 	use 'lewis6991/gitsigns.nvim'
 	use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
+	use 'jparise/vim-graphql'
 end)
 
 vim.cmd [[packadd packer.nvim]]
@@ -69,7 +70,7 @@ require('lspconfig').tailwindcss.setup {
 -- NOTE: https://the-guild.dev/graphql/config/docs
 require('lspconfig').graphql.setup {
 	capabilities = capabilities,
-	filetypes = {'vue', 'typescript', 'javascriptreact', 'typescriptreact'}
+	filetypes = {'vue', 'typescript', 'javascriptreact', 'typescriptreact', 'graphql'}
 }
 
 -- npm install -g dockerfile-language-server-nodejs
