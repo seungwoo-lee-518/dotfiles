@@ -60,6 +60,11 @@ require('lspconfig').nil_ls.setup {
 	capabilities = capabilities
 }
 
+-- pnpm install -g @tailwindcss/language-server
+require('lspconfig').tailwindcss.setup {
+	capabilities = capabilities
+}
+
 -- luasnip setup
 local luasnip = require 'luasnip'
 
