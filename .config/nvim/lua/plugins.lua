@@ -60,8 +60,19 @@ require('lspconfig').nil_ls.setup {
 	capabilities = capabilities
 }
 
--- pnpm install -g @tailwindcss/language-server
 require('lspconfig').tailwindcss.setup {
+	capabilities = capabilities
+}
+
+-- pnpm install -g graphql-language-service-cli
+-- NOTE: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#graphql
+-- NOTE: https://the-guild.dev/graphql/config/docs
+require('lspconfig').graphql.setup {
+	capabilities = capabilities
+}
+
+-- npm install -g dockerfile-language-server-nodejs
+require('lspconfig').dockerls.setup {
 	capabilities = capabilities
 }
 
