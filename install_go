@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-echo "[+] Install Golang 1.19"
-sudo pacman -Sy go=2:1.19.5-1
