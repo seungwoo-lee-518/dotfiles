@@ -23,12 +23,12 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-	# Kime 입력기를 사용합니다
-	# 다른 입력기도 있습니다만, Kime 이 제일 나은
-	# 선택인 것 같아서 사용하였습니다. 
+  # Kime 입력기를 사용합니다
+  # 다른 입력기도 있습니다만, Kime 이 제일 나은
+  # 선택인 것 같아서 사용하였습니다. 
   i18n.inputMethod.enabled = "kime";
 
-	# 한국 로케일 적용
+  # 한국 로케일 적용
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ko_KR.UTF-8";
     LC_IDENTIFICATION = "ko_KR.UTF-8";
@@ -69,18 +69,18 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-	# 원래는 처음에 해당 부분이 주석처리되어 있었으나,
-	# 주석을 풀고 업데이트 해봤더니 몇가지 안되던 부분들이 동작해서
-	# 켜두었습니다.
+  # 원래는 처음에 해당 부분이 주석처리되어 있었으나,
+  # 주석을 풀고 업데이트 해봤더니 몇가지 안되던 부분들이 동작해서
+  # 켜두었습니다.
   services.xserver.libinput.enable = true;
 
-	# Intel GPU 가속을 할 수 있도록 코덱 설정 추가
+  # Intel GPU 가속을 할 수 있도록 코덱 설정 추가
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
 
-	# OpenGL 을 사용하고, 해당 설정에 Intel GPU Driver
-	# 을 추가하였습니다.
+  # OpenGL 을 사용하고, 해당 설정에 Intel GPU Driver
+  # 을 추가하였습니다.
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -91,8 +91,8 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-	# 기본적으로 GUI 를 통해서 설치할 때, 사용자를 추가해준 설정 그대로
-	# 사용중입니다.
+  # 기본적으로 GUI 를 통해서 설치할 때, 사용자를 추가해준 설정 그대로
+  # 사용중입니다.
   users.users.seungwoo = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -103,15 +103,15 @@
     ];
   };
 
-	# CJK 폰트를 사용하지 않으면
-	# 한국어가 자글자글 거리기 때문에
-	# 21 세기를 살아가는 사람에게 해롭습니다.
+  # CJK 폰트를 사용하지 않으면
+  # 한국어가 자글자글 거리기 때문에
+  # 21 세기를 살아가는 사람에게 해롭습니다.
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
-		# NerdFont 가 필요한 경우가 있어서
-		# 폰트를 추가하였습니다.
+    # NerdFont 가 필요한 경우가 있어서
+    # 폰트를 추가하였습니다.
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
@@ -137,12 +137,12 @@
     git
     slack
     zellij
-		go
-		rustup
-		jq
-		zed
-		buf
-		go-task
+    go
+    rustup
+    jq
+    zed
+    buf
+    go-task
   ];
 
   environment.shells = with pkgs; [ zsh ];
@@ -166,6 +166,18 @@
     enable = true;
     plugins = [ "git" ];
     theme = "robbyrussell";
+  };
+
+  virtualisation = {
+    podman = {
+      # enable podman
+      enable = true;
+      # add Alias
+      dockerCompat = true;
+      defaultNetwork.settings = {
+        dns_enabled = true;
+      };
+    };
   };
 
   # List services that you want to enable:
