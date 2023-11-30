@@ -13,22 +13,30 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Cleans up "/tmp" on Boot
+  boot.tmp.cleanOnBoot = true;
 
   networking.hostName = "nixos"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Enable networking
   networking.networkmanager.enable = true;
+  # Additional Configuration for Captive Portal
+  networking.extraHosts = ''
+    211.39.134.20 first.wifi.olleh.com
+  '';
 
   # Set your time zone.
   time.timeZone = "Asia/Seoul";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # Kime 입력기를 사용합니다
-  # 다른 입력기도 있습니다만, Kime 이 제일 나은
-  # 선택인 것 같아서 사용하였습니다. 
   i18n.inputMethod.enabled = "kime";
 
-  # 한국 로케일 적용
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ko_KR.UTF-8";
     LC_IDENTIFICATION = "ko_KR.UTF-8";
@@ -44,18 +52,20 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # Enable the KDE Plasma Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    layout = "kr";
+    xkbVariant = "kr104";
   };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -66,16 +76,18 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # 원래는 처음에 해당 부분이 주석처리되어 있었으나,
-  # 주석을 풀고 업데이트 해봤더니 몇가지 안되던 부분들이 동작해서
-  # 켜두었습니다.
   services.xserver.libinput.enable = true;
-
-  # Intel GPU 가속을 할 수 있도록 코덱 설정 추가
-  nixpkgs.config.packageOverrides = pkgs: {
+  
+  # Intel GPU 가속을 할 수 있도록 코덱 설정 추가  nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
 
@@ -91,37 +103,50 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # 기본적으로 GUI 를 통해서 설치할 때, 사용자를 추가해준 설정 그대로
-  # 사용중입니다.
   users.users.seungwoo = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    description = "SEUNGWOO";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "seungwoo";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
+      slack
+      kate
+      helix
+      zellij
+      git
+      nil
+      dogdns
+      jq
+      gojq
+      gcc
+      stdenv.cc.cc.lib
+      zlib
+      zlib-ng
+      viddy
+      unzip
+      ffmpeg
+      vlc
+      kustomize
+      gitui
+      okteta
+      docker-compose
     ];
   };
-
-  # CJK 폰트를 사용하지 않으면
-  # 한국어가 자글자글 거리기 때문에
-  # 21 세기를 살아가는 사람에게 해롭습니다.
+  
+  # CJK 폰트를 사용하지 않으면  # 한국어가 자글자글 거리기 때문에  # 21 세기를 살아가는 사람에게 해롭습니다.
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
-    # NerdFont 가 필요한 경우가 있어서
-    # 폰트를 추가하였습니다.
+    # NerdFont 가 필요한 경우가 있어서    # 폰트를 추가하였습니다.
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
+  
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "seungwoo";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -129,71 +154,59 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim 
+    intel-gpu-tools
     curl
-    pkgs.gnome.gnome-terminal
-    pkgs.intel-gpu-tools
     neofetch
-    git
-    slack
-    zellij
-    go
-    rustup
-    jq
-    zed
-    buf
-    go-task
+    imagemagick
+    fwupd
+    btrfs-progs
+    wireguard-tools
+    kernelshark
+    trace-cmd
+    libnbd
   ];
 
+  # Enable Network Block Device support
+  programs.nbd.enable = true;
+
+  services.fwupd.enable = true;
+
   environment.shells = with pkgs; [ zsh ];
-
   environment.variables = {
-    EDITOR="nvim";
+    EDITOR="hx";
     GOPATH="$HOME/go";
-    PATH="$GOPATH/bin:$PATH";
+    PATH="$GOPATH/bin:/usr/local/bin:$PATH";
   };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
     enable = true;
-    plugins = [ "git" ];
+    plugins = [ "git" "docker" ];
     theme = "robbyrussell";
   };
 
+  # Enable Docker  
   virtualisation = {
-    podman = {
-      # enable podman
+    docker = {
       enable = true;
-      # add Alias
-      dockerCompat = true;
-      defaultNetwork.settings = {
-        dns_enabled = true;
-      };
     };
   };
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  programs.ssh.startAgent = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
+
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
