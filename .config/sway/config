@@ -5,6 +5,8 @@
 # Read `man 5 sway` for a complete reference.
 
 set $menu bemenu-run
+set $lock swaylock -c 550000
+set $lockman exec bash ~/.config/sway/lockman.sh
 
 ### Variables
 #
@@ -47,6 +49,11 @@ set $term konsole
 
 exec dbus-sway-environment
 exec configure-gtk
+exec swayidle -w \
+    timeout 600 $lock \
+    timeout 570 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep $lock
 
 ### Input configuration
 #
@@ -76,6 +83,7 @@ input * xkb_options korean:ralt_hangul,korean:rctrl_hanja
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+l exec $lockman
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -96,7 +104,7 @@ input * xkb_options korean:ralt_hangul,korean:rctrl_hanja
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    # bindsym $mod+$right focus right
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
